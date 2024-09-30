@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Headers from "@/components/header";
-import ImageProvider from "@/components/image";
+// import Image from "next/image";
+// import Headers from "@/components/header";
+// import ImageProvider from "@/components/image";
 //import MyComponent from "@/components/buttonProvider";
 import MainComponent from "@/components/main";
 

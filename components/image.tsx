@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { createOptions} from '@/utils/utils'
 import Image from 'next/image';
 import DotLoader from 'react-spinners/DotLoader'
-import {useEffect } from 'react';
+//import {useEffect } from 'react';
 import dynamic from "next/dynamic";
 import FieldProvider from './fields';
 import Minter from './Minter';
@@ -24,7 +24,7 @@ const ImageProvider = () => {
     const [pic, setPic] = useState<Pic | null>(null)
     const [input, setInput] = useState<string>('')
     const [loading, setloading] = useState<boolean>()
-    const [history, setHistotry] = useState([])
+    //const [history, setHistotry] = useState([])
 
     const handler = async(e: React.MouseEvent<HTMLButtonElement>) => {
 
@@ -79,4 +79,4 @@ const ImageProvider = () => {
         )
 }
 
-export default ImageProvider
+export default dynamic (() => Promise.resolve(ImageProvider), {ssr: false})

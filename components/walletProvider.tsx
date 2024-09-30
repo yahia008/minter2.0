@@ -9,7 +9,7 @@ import {WalletModalProvider} from '@solana/wallet-adapter-react-ui'
 import { clusterApiUrl } from '@solana/web3.js';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import {  
-    PhantomWalletAdapter,  
+    PhantomWalletAdapter,
 } from '@solana/wallet-adapter-wallets';  
 import { useState, useEffect } from 'react';
 import dynamic from "next/dynamic";

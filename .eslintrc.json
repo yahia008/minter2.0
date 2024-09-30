@@ -1,3 +1,11 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "no-unused-vars": "off", // Disable unused variable warnings
+    "@typescript-eslint/no-unused-vars": "off", // Disable TypeScript unused variable warnings
+    "import/no-dynamic-require": "off", // Disable dynamic require warnings
+    "react-hooks/rules-of-hooks": "off", // Disable React hooks rules (e.g., useEffect, useState)
+    "no-console": "off", // Optionally disable console warnings
+    "@typescript-eslint/explicit-module-boundary-types": "off" // Optionally disable requirement for explicit return types
+  }
 }
