@@ -66,7 +66,7 @@ const ImageProvider = () => {
             src={pic.generated_image}
             alt="my pic"
             className="h-full w-full"
-            style={{ height: '400px', width: '300px' }} // Ensure sizing is set
+            style={{ height: '300px', width: '300px' }} // Ensure sizing is set
           />
         )
     )}
