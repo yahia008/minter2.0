@@ -4,7 +4,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 import { createOptions} from '@/utils/utils'
-import Image from 'next/image';
+//import Image from 'next/image';
 import DotLoader from 'react-spinners/DotLoader'
 //import {useEffect } from 'react';
 import dynamic from "next/dynamic";
@@ -62,13 +62,12 @@ const ImageProvider = () => {
         <div className='flex justify-center items-center h-full w-full'><DotLoader color='#008B8B'/></div> // This can be replaced with any loading spinner component
     ) : (
         pic?.generated_image && (
-            <Image
-                src={pic.generated_image}
-                height={400}
-                width={300}
-                alt="my pic"
-                className="h-full w-full"
-            />
+            <img
+            src={pic.generated_image}
+            alt="my pic"
+            className="h-full w-full"
+            style={{ height: '400px', width: '300px' }} // Ensure sizing is set
+          />
         )
     )}
             </div>
