@@ -3,6 +3,7 @@
   "rules": {
     "no-unused-vars": "off", // Disable unused variable warnings
     "@typescript-eslint/no-unused-vars": "off", // Disable TypeScript unused variable warnings
+    "@typescript-eslint/no-empty-interface": "off",
     "import/no-dynamic-require": "off", // Disable dynamic require warnings
     "react-hooks/rules-of-hooks": "off", // Disable React hooks rules (e.g., useEffect, useState)
     "no-console": "off", // Optionally disable console warnings

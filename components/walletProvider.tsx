@@ -16,7 +16,8 @@ import dynamic from "next/dynamic";
 
 
 
-require('@solana/wallet-adapter-react-ui/styles.css');
+import '@solana/wallet-adapter-react-ui/styles.css';
+
 
     const SolanaWalletProvider = ({children}:{children:React.ReactNode}) => {
        
