@@ -3,7 +3,7 @@ const nextConfig = {
     images: {
         domains: ['prlabsapi.com']
       },
-      output: 'export',
+      
 };
 
 export default nextConfig;
