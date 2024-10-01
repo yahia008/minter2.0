@@ -10,6 +10,7 @@ import { clusterApiUrl } from '@solana/web3.js';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import {  
     PhantomWalletAdapter,
+    SolflareWalletAdapter
 } from '@solana/wallet-adapter-wallets';  
 import { useState, useEffect } from 'react';
 import dynamic from "next/dynamic";
@@ -25,7 +26,7 @@ import '@solana/wallet-adapter-react-ui/styles.css';
           const endpoint = useMemo(()=>clusterApiUrl(network),[network]); // Use 'mainnet-beta' for production
       
           // Memoize wallets to avoid unnecessary re-renders
-          const wallets = useMemo(() => [new PhantomWalletAdapter()], [network]);
+          const wallets = useMemo(() => [new PhantomWalletAdapter(), new SolflareWalletAdapter()], [network]);
       
         return (
           
