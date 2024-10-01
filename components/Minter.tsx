@@ -27,7 +27,11 @@ const Minter = ({url, input}:MIntprops) => {
 
 
   const handleMint = useCallback(async () => {
-    if (connected && wallet) {
+    if (!connected) {
+      await connect();  // Ensure wallet connection
+    }
+
+    if (wallet && publicKey) {
       const uploadedImageUrl = await uploader(url); // Get the uploaded image URL
       if (uploadedImageUrl) {
         await mintNFT(wallet, uploadedImageUrl, input); // Use the image URL for minting
@@ -37,7 +41,7 @@ const Minter = ({url, input}:MIntprops) => {
     } else {
       console.error('Wallet not connected!');
     }
-  }, [wallet, connected, url]);
+  }, [wallet, publicKey, connected, url, connect]);
 
   return (
     <div>
