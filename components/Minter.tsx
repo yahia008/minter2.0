@@ -32,7 +32,8 @@ const Minter = ({url, input}:MIntprops) => {
     <div>
     {url  && (
     <CldUploadWidget
-    options={{ sources: [ 'url']
+    options={{ sources: [ 'url'],
+      uploadPreset: process.env.PRESET_NAME
      }}
     onSuccess={(result, { widget }) => {
      console.log(result)  // { public_id, secure_url, etc }
