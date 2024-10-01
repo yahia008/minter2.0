@@ -4,7 +4,7 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import BN from 'bn.js'
 
 
-export const mintNFT = async (wallet: PhantomWalletAdapter, ipfsUrl: string) => {
+export const mintNFT = async (wallet: any, uri: string, input:string) => {
     const maxSupply = new BN(1);
     (maxSupply as any).__opaque__ = 'BigNumber';
     // Connect to the Solana network
@@ -19,8 +19,8 @@ export const mintNFT = async (wallet: PhantomWalletAdapter, ipfsUrl: string) => 
     const { nft } = await metaplex
         .nfts()
         .create({
-            uri: ipfsUrl, // IPFS URL from NFT.Storage
-            name: 'AI Generated NFT',
+            uri: uri, // IPFS URL from NFT.Storage
+            name: input,
             sellerFeeBasisPoints: 500, // 5% royalty
             
              // Number of copies allowed, set to 1 for a unique NFT
@@ -45,20 +45,28 @@ export const createOptions = (input: string) => (
  });
  
 
- export const uploader= (url:string)=> {
-    const formData = new FormData()
-    formData.append('file', url)
-    formData.append('upload_preset', "ml_default")
+ export const uploader = async (url: string): Promise<string | undefined> => {
+  const formData = new FormData();
+  formData.append('file', url);
+  formData.append('upload_preset', 'ml_default');
 
-    fetch('https://api.cloudinary.com/v1_1/dwcxrevad/image/upload', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Uploaded Image URL:', data.secure_url);
-          
-        })
-        .catch((error) => console.error('Error uploading to Cloudinary:', error));
-    };
- 
+  try {
+    const response = await fetch('https://api.cloudinary.com/v1_1/dwcxrevad/image/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.secure_url) {
+      console.log('Uploaded Image URL:', data.secure_url);
+      return data.secure_url; // Return the uploaded image URL
+    } else {
+      console.error('Error: Image URL not found in response');
+      return undefined;
+    }
+  } catch (error) {
+    console.error('Error uploading to Cloudinary:', error);
+    return undefined;
+  }
+};
