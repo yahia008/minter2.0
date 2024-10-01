@@ -30,7 +30,7 @@ const Minter = ({url, input}:MIntprops) => {
 
   return (
     <div>
-    {url && (
+    {url && publicKey &&(
     <CldUploadWidget uploadPreset='ml_default'
     options={{ sources: [ 'url']
      }}
