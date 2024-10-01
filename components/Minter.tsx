@@ -45,7 +45,7 @@ const Minter = ({url, input}:MIntprops) => {
 {({ open }) => {
     function handleOnClick() {
       setResource(undefined);
-      uploader(url)
+     // uploader(url)
       open();
     }
     return (
