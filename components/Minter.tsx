@@ -26,39 +26,23 @@ const Minter = ({url, input}:MIntprops) => {
   const [resource, setResource] = useState<string | CloudinaryUploadWidgetInfo | undefined>();
 
 
+  const handleOnClick = () => {
+     // Generate the image and get the URL
     
+      uploader(url); // Pass the generated URL to the uploader function
+    }
+  
 
   return (
     <div>
     {url  && (
-    <CldUploadWidget
-    options={{ sources: [ 'url'],
-      uploadPreset: "ml_default"
-     }}
-    onSuccess={(result, { widget }) => {
-     console.log(result)  // { public_id, secure_url, etc }
-    }}
-    onQueuesEnd={(result, { widget }) => {
-      widget.close();
-    }}
-    >
-
-{({ open }) => {
-    function handleOnClick() {
-      setResource(undefined);
-     uploader(url)
-      open();
-    }
-    return (
-      <button onClick={handleOnClick} className='bg-white m-3 w-[200px] 
-      sm:w-[500px] text-center font-bold rounded text-black p-3'>
-        mint
-      </button>
-    );
-  }}
-
-
-    </CldUploadWidget>)}
+    <button
+    onClick={handleOnClick}
+    className="bg-white m-3 w-[200px] sm:w-[500px] text-center font-bold rounded text-black p-3"
+  >
+    Mint
+  </button>
+    )}
 </div>
   )
 }
