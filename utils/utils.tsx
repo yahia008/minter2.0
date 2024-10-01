@@ -48,7 +48,7 @@ export const createOptions = (input: string) => (
  export const uploader= (url:string)=> {
     const formData = new FormData()
     formData.append('file', url)
-    formData.append('upload_preset', 'ml_default')
+    formData.append('upload_preset', process.env.PRESET_NAME)
 
     fetch('https://api.cloudinary.com/v1_1/dwcxrevad/image/upload', {
         method: 'POST',

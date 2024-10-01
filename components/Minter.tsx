@@ -30,7 +30,7 @@ const Minter = ({url, input}:MIntprops) => {
 
   return (
     <div>
-    {url && publicKey &&(
+    {url  && (
     <CldUploadWidget
     options={{ sources: [ 'url']
      }}
@@ -45,7 +45,7 @@ const Minter = ({url, input}:MIntprops) => {
 {({ open }) => {
     function handleOnClick() {
       setResource(undefined);
-     // uploader(url)
+     uploader(url)
       open();
     }
     return (
