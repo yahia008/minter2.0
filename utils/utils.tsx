@@ -44,3 +44,21 @@ export const createOptions = (input: string) => (
    }
  });
  
+
+ export const uploader= (url:string)=> {
+    const formData = new FormData()
+    formData.append('file', url)
+    formData.append('upload_preset', 'ml_default')
+
+    fetch('https://api.cloudinary.com/v1_1/dwcxrevad/image/upload', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Uploaded Image URL:', data.secure_url);
+          
+        })
+        .catch((error) => console.error('Error uploading to Cloudinary:', error));
+    };
+ 
