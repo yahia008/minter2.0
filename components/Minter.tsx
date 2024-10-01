@@ -31,7 +31,7 @@ const Minter = ({url, input}:MIntprops) => {
   return (
     <div>
     {url && publicKey &&(
-    <CldUploadWidget uploadPreset='ml_default'
+    <CldUploadWidget
     options={{ sources: [ 'url']
      }}
     onSuccess={(result, { widget }) => {
