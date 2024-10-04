@@ -28,6 +28,7 @@ const Minter = ({ url, input }: MIntProps) => {
       // Ensure wallet is connected
       if (!connected && !connecting) {
         await connect();
+        console.log('Wallet connected after connect:', { connected, publicKey, wallet });
         setStatus('Wallet connected!');
       }
       
