@@ -31,7 +31,10 @@ const Minter = ({ url, input }: MIntProps) => {
         console.log('Wallet connected after connect:', { connected, publicKey, wallet });
         setStatus('Wallet connected!');
       }
-      
+      if(connected){
+        console.log('Wallet connected after connect:', { connected, publicKey, wallet });
+        setStatus('Wallet connected!');
+      }
       if (!wallet || !publicKey) {
         setStatus('Wallet not initialized or public key unavailable.');
         throw new Error('Wallet not initialized or public key unavailable.');
