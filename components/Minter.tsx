@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect} from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { mintNFT, uploader } from '@/utils/utils'; 
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
@@ -19,6 +19,15 @@ const Minter = ({ url, input }: MIntProps) => {
   const { publicKey, wallet, connect, connected, connecting} = useWallet();
   const [status, setStatus] = useState<string>('');
   const [resource, setResource] = useState<string | CloudinaryUploadWidgetInfo | undefined>();
+
+  useEffect(() => {
+    const initWallet = async () => {
+      if (!connected) {
+        await connect();
+      }
+    };
+    initWallet();
+  }, [connect, connected]);
 
   const handleMint = useCallback(async () => {
     try {
