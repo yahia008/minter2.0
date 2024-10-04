@@ -1,47 +1,61 @@
 "use client"
-import React, { useCallback } from 'react'
-import { useState } from 'react'
-import axios from 'axios'
-import { NFTStorage, File } from 'nft.storage';
-import {mintNFT, uploader} from '@/utils/utils' 
+import React, { useCallback, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { mintNFT, uploader } from '@/utils/utils'; 
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import dynamic from 'next/dynamic';
 import { CldUploadWidget } from 'next-cloudinary';
 
-
-interface MIntprops {
-  url:string
-  input:string
+interface MIntProps {
+  url: string;
+  input: string;
 }
 
 type CloudinaryUploadWidgetInfo = {
-  url:string
-}
-const Minter = ({url, input}:MIntprops) => {
-  const { publicKey, wallet, connect, connected } = useWallet();
+  url: string;
+};
 
-  const text = input.split(" ")
-  const [status, setStatus] = useState<string>()
+const Minter = ({ url, input }: MIntProps) => {
+  const { publicKey, wallet, connect, connected } = useWallet();
+  const [status, setStatus] = useState<string>('');
   const [resource, setResource] = useState<string | CloudinaryUploadWidgetInfo | undefined>();
 
-
   const handleMint = useCallback(async () => {
-    if (!connected) {
-      await connect();  // Ensure wallet connection
-    }
+    try {
+      // Update status to indicate minting process has started
+      setStatus('Connecting to wallet...');
 
-    if (wallet && publicKey) {
-      const uploadedImageUrl = await uploader(url); // Get the uploaded image URL
-      if (uploadedImageUrl) {
-        await mintNFT(wallet, uploadedImageUrl, input); // Use the image URL for minting
-      } else {
-        console.error('Failed to upload image.');
+      // Ensure wallet is connected
+      if (!connected) {
+        await connect();
       }
-    } else {
-      console.error('Wallet not connected!');
+
+      // Check if wallet and publicKey are available
+      if (wallet && publicKey) {
+        setStatus('Uploading image...');
+
+        // Upload image using your uploader utility function
+        const uploadedImageUrl = await uploader(url); 
+        if (!uploadedImageUrl) {
+          setStatus('Image upload failed!');
+          throw new Error('Failed to upload image.');
+        }
+
+        setStatus('Minting NFT...');
+        
+        // Proceed with NFT minting using the uploaded image URL and input prompt
+        await mintNFT(wallet, uploadedImageUrl, input);
+        setStatus('NFT minted successfully!');
+
+      } else {
+        setStatus('Wallet not connected!');
+        throw new Error('Wallet not connected!');
+      }
+    } catch (error) {
+      console.error('Minting error:', error);
+      setStatus(`Minting failed: ${error.message}`);
     }
-  }, [wallet, publicKey, connected, url, connect]);
+  }, [wallet, publicKey, connected, url, input, connect]);
 
   return (
     <div>
@@ -53,6 +67,7 @@ const Minter = ({url, input}:MIntprops) => {
     Mint
   </button>
     )}
+    <h1>{status}</h1>
 </div>
   )
 }

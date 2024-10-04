@@ -1,5 +1,5 @@
 import { Connection, clusterApiUrl } from '@solana/web3.js';
-import { Metaplex, walletAdapterIdentity,  } from '@metaplex-foundation/js';
+import { Metaplex, walletAdapterIdentity } from '@metaplex-foundation/js';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import BN from 'bn.js'
 
@@ -9,7 +9,7 @@ export const mintNFT = async (wallet: any, uri: string, input:string) => {
     (maxSupply as any).__opaque__ = 'BigNumber';
     // Connect to the Solana network
     const connection = new Connection(clusterApiUrl('devnet'));
-
+    
     // Initialize Metaplex with the connection and wallet
     const metaplex = Metaplex.make(connection)
         .use(walletAdapterIdentity(wallet))
